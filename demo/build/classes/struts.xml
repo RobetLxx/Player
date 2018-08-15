@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 开发模式 -->
+	<constant name="struts.devMode" value="true"></constant>
+	<!-- 自动重载修改后的struts配置文件 -->
+	<constant name="struts.configuration.xml.reload" value="true"></constant>
+	<!-- 浏览器缓存静态内容 -->
+	<constant name="struts.serve.static.browserCache" value="false"></constant>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+	<constant name="struts.objectFactory" value="struts"></constant>
+	<constant name="struts.action.extension" value="action"></constant>
+    <package name="demo" namespace="" extends="struts-default">
+    	<action name="playerAction" class="com.action.SelectAction" method="execute">
+    		<result name="success">index.jsp</result>
+    	</action>
+    </package>
+</struts>

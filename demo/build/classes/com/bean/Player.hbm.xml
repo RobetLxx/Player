@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.bean.Player" table="Player">
+		<id name="d_id" type="int">
+			<column name="d_id"></column>
+			<generator class="native"></generator>
+		</id>
+		<property name="c_id" type="int">
+			<column name="c_id" length="11"></column>
+		</property>
+		<property name="dt_id" type="int">
+			<column name="dt_id" length="11"></column>
+		</property>
+		<property name="d_mac" type="string">
+			<column name="d_mac" length="100"></column>
+		</property>
+		<property name="d_location" type="string">
+			<column name="d_location" length="100"></column>
+		</property>
+		<property name="d_name" type="string">
+			<column name="d_name" length="200"></column>
+		</property>
+		<property name="d_status" type="int">
+			<column name="d_status" length="1"></column>
+		</property>
+		<property name="d_cycle" type="int">
+			<column name="d_cycle" length="11"></column>
+		</property>
+	</class>
+</hibernate-mapping>

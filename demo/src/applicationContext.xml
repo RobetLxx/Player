@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 数据库连接 -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:dbcp.properties</value>
+		</property>
+	</bean>
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${driverClassName}">
+		</property>
+		<property name="url" value="${url}"></property>
+		<property name="username" value="${username}"></property>
+		<property name="password" value="${password}"></property>
+	</bean>
+	
+	<!-- Hibernate读取数据 -->
+	<bean id="PlayerAction" class="com.action.IndexAction" scope="prototype">
+       	 <!-- setIs(myIndexService) -->
+         <property name="playerAction" ref="PlayerService"/>
+    </bean>
+     
+     <!-- myIndexService = new ssh.service.IndexServiceImpl() -->
+    <bean id="PlayerService" class="com.service.impl.PlayerServiceImpl" scope="prototype">
+         <property name="playerService" ref="PlayerDao"/>
+    </bean>
+     
+    <bean id="PlayerDao" class="com.dao.impl.PlayerDaoImpl" scope="prototype">
+         <!-- 把sessionFactory 注入给IndexDao -->
+         <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+     
+     
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource"/>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.SQLServerDialect
+				</prop>
+			</props>
+		</property>
+		
+		<property name="mappingResources">
+			<list>
+				<value>com/bean/Player.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 03. hibernate模板 -->  
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">  
+        <property name="sessionFactory" ref="sessionFactory" />  
+    </bean>
+    
+</beans>
